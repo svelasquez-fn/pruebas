@@ -1,0 +1,503 @@
+:root {
+  --accent: #FFFFFF;
+  --accent-fg: #FFFFFF;
+  --white: #FFFFFF;
+  --cool: transparent;
+  --ink: #FFFFFF;
+  --muted: rgba(255, 255, 255, 0.70);
+  --border: rgba(255, 255, 255, 0.25);
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  color: #FFFFFF;
+  background: transparent;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+h1,
+h2,
+h3,
+.logo {
+  font-family: Lexend, sans-serif;
+}
+
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (min-width: 640px) {
+  .wrap {
+    padding: 0 24px;
+  }
+}
+
+section {
+  padding: 48px 0;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: 80px 0;
+  }
+}
+
+
+/* =========================
+   IMÁGENES
+========================= */
+
+img {
+  background: transparent;
+  filter: brightness(0) invert(1);
+}
+
+img {
+  object-fit: contain;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  background: transparent !important;
+  border-bottom: 1px solid transparent;
+}
+
+header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.375rem;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: .9375rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  background: transparent !important;
+  color: #FFFFFF !important;
+  transition: transform .15s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: transparent !important;
+  color: #FFFFFF !important;
+  border-color: transparent;
+}
+
+.btn-secondary {
+  background: transparent !important;
+  color: #FFFFFF !important;
+  border-color: transparent;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  background: transparent !important;
+  border-bottom: 1px solid transparent;
+}
+
+.hero .wrap {
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .hero .wrap {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+  }
+}
+
+.badge {
+  display: inline-block;
+  background: transparent !important;
+  border: 1px solid transparent;
+  color: #FFFFFF !important;
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: .75rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #FFFFFF !important;
+}
+
+.hero p.lead {
+  color: #FFFFFF !important;
+  font-size: 1.125rem;
+  max-width: 52ch;
+  margin: 16px 0 32px;
+}
+
+.hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero-card {
+  background: transparent !important;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+
+/* =========================
+   JOB
+========================= */
+
+.job {
+  background: transparent !important;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.job + .job {
+  margin-top: 8px;
+}
+
+.job h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #FFFFFF !important;
+}
+
+.job small {
+  color: #FFFFFF !important;
+  font-size: .8125rem;
+}
+
+.chip {
+  align-self: flex-start;
+  white-space: nowrap;
+  background: transparent !important;
+  border: 1px solid transparent;
+  color: #FFFFFF !important;
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: .75rem;
+  font-weight: 600;
+}
+
+
+/* =========================
+   TÍTULOS
+========================= */
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+  color: #FFFFFF !important;
+}
+
+@media (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+.sub {
+  color: #FFFFFF !important;
+  margin-bottom: 32px;
+  max-width: 60ch;
+}
+
+
+/* =========================
+   GRID
+========================= */
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid.feat {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .grid.testi {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+  background: transparent !important;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.card h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 8px;
+  color: #FFFFFF !important;
+}
+
+.card p {
+  color: #FFFFFF !important;
+  font-size: .9375rem;
+}
+
+
+/* =========================
+   TESTIMONIOS
+========================= */
+
+.t-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.t-head img {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  object-fit: cover;
+  background: transparent !important;
+  border: 1px solid transparent;
+}
+
+.t-head strong {
+  font-family: Lexend, sans-serif;
+  font-size: .9375rem;
+  line-height: 1.3;
+  color: #FFFFFF !important;
+}
+
+.card.t p {
+  color: #FFFFFF !important;
+}
+
+.state {
+  color: #FFFFFF !important;
+  text-align: center;
+  padding: 32px 0;
+  grid-column: 1 / -1;
+}
+
+.t-head small {
+  display: block;
+  color: #FFFFFF !important;
+  font-size: .8125rem;
+}
+
+.t-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+.stars {
+  color: #FFFFFF !important;
+  letter-spacing: 1px;
+  font-size: .9375rem;
+  white-space: nowrap;
+}
+
+.stars .off {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+.card.t {
+  display: flex;
+  flex-direction: column;
+}
+
+.t-head-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+
+
+/* =========================
+   PROMEDIO
+========================= */
+
+.avg {
+  font-weight: 600;
+  font-size: .9375rem;
+  color: #FFFFFF !important;
+  background: transparent !important;
+  border: none !important;
+}
+
+
+/* =========================
+   FILTROS
+========================= */
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.fchip {
+  min-height: 36px;
+  padding: 2px 12px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: transparent !important;
+  color: #FFFFFF !important;
+  font: 600 .8125rem Inter, sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.fchip[aria-pressed="true"] {
+  background: transparent !important;
+  border-color: transparent !important;
+  color: #FFFFFF !important;
+}
+
+
+/* =========================
+   MÁS
+========================= */
+
+.more {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.more button {
+  cursor: pointer;
+  font-family: inherit;
+  background: transparent !important;
+  color: #FFFFFF !important;
+  border: 1px solid transparent;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta {
+  background: transparent !important;
+  border-top: 2px solid transparent;
+  text-align: center;
+}
+
+.cta p {
+  color: #FFFFFF !important;
+  margin: 0 auto 32px;
+  max-width: 48ch;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  padding: 24px 0;
+  text-align: center;
+  font-size: .8125rem;
+  color: #FFFFFF !important;
+}
+
+
+/* =========================
+   FOCUS
+========================= */
+
+:focus-visible {
+  outline: 2px solid #FFFFFF;
+  outline-offset: 2px;
+}
+
+
+/* =========================
+   ELEMENTOS OCULTOS
+========================= */
+
+[hidden] {
+  display: none !important;
+}

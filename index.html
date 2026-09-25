@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relevo | Tu primer trabajo empieza aquí</title>
+  <meta name="description" content="Relevo conecta a jóvenes de Lima con trabajos por horas y medio tiempo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lexend:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <span class="logo">Relevo</span>
+      <a class="btn btn-secondary" href="#cta">Crear mi perfil</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <span class="badge">Para jóvenes de Lima</span>
+          <h1>Impulsa tu futuro con Relevo.</h1>
+          <p class="lead">Encuentra trabajos por horas y de medio tiempo cerca de ti, que encajen con tus estudios y tus habilidades.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#cta">Ver trabajos</a>
+            <a class="btn btn-secondary" href="#testimonios">Historias reales</a>
+          </div>
+        </div>
+        <div class="hero-card" aria-hidden="true">
+          <div class="job"><div><h3>Atención al cliente</h3><small>Miraflores · Fines de semana</small></div><span class="chip">Por horas</span></div>
+          <div class="job"><div><h3>Ayudante de cocina</h3><small>San Miguel · Turno noche</small></div><span class="chip">Medio tiempo</span></div>
+          <div class="job"><div><h3>Reponedor</h3><small>Ate · Lunes a viernes</small></div><span class="chip">Por horas</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios">
+      <div class="wrap">
+        <h2>Pensado para tu día a día</h2>
+        <p class="sub">Menos vueltas, más oportunidades que sí puedes tomar.</p>
+        <div class="grid feat">
+          <div class="card"><h3>Trabajos cerca de ti</h3><p>Ofertas en tu distrito para que gastes menos tiempo y pasajes.</p></div>
+          <div class="card"><h3>Horarios flexibles</h3><p>Por horas o medio tiempo, compatibles con tus clases.</p></div>
+          <div class="card"><h3>Match por habilidades</h3><p>Te mostramos primero los trabajos que mejor calzan contigo.</p></div>
+          <div class="card"><h3>Todo desde el celular</h3><p>Postula en minutos, sin CV complicado ni trámites largos.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonios" style="padding-top:0">
+      <div class="wrap">
+        <div class="t-head-row">
+          <h2>Lo que cuentan quienes ya usan Relevo</h2>
+          <span id="avg" class="avg" hidden></span>
+        </div>
+        <p class="sub">Experiencias de jóvenes de distintos distritos de Lima.</p>
+        <div id="filters" class="filters" role="group" aria-label="Filtrar por rubro"></div>
+        <div id="testimonials" class="grid testi" aria-live="polite">
+          <p class="state">Cargando testimonios…</p>
+        </div>
+        <div class="more"><button id="more" class="btn btn-secondary" hidden>Ver más</button></div>
+      </div>
+    </section>
+
+    <section id="cta" class="cta">
+      <div class="wrap">
+        <h2>Tu próximo trabajo te está esperando</h2>
+        <p>Crea tu perfil gratis y empieza a postular hoy.</p>
+        <a class="btn btn-primary" href="#">Empezar ahora</a>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">Relevo · Lima, Perú · Página de práctica</div></footer>
+
+  <script src="config.js"></script>
+  <script>
+    const AVATAR_DIR = "assets/avatars/";
+    // Mismos textos que la migración, usados si el fetch falla.
+    const PAGE = 6;
+    // Mismo shape que la tabla; se usan si el fetch falla.
+    const FALLBACK = [
+      { name: "Camila Quispe", district: "San Juan de Lurigancho", rubro: "Atención al cliente", rating: 5, comment: "Postular me tomó cinco minutos desde el celular. Al día siguiente ya me estaban escribiendo para la entrevista.", avatar_url: "avatar-01.jpg" },
+      { name: "Diego Huamán", district: "Comas", rubro: "Delivery", rating: 5, comment: "Fue mi primera experiencia laboral. Elijo mis horarios y así sigo yendo a clases en las mañanas.", avatar_url: "avatar-02.jpg" },
+      { name: "Lucía Paredes", district: "Santiago de Surco", rubro: "Retail", rating: 4, comment: "El chat con la tienda me ayudó a resolver dudas antes de ir a la entrevista. Me respondieron el mismo día.", avatar_url: "avatar-03.jpg" },
+      { name: "Jorge Salazar", district: "Villa El Salvador", rubro: "Almacén", rating: 3, comment: "Me pagaron puntual, pero la oferta no explicaba bien el horario. Al final todo salió bien.", avatar_url: "avatar-04.jpg" },
+    ];
+
+    const box = document.getElementById("testimonials");
+    const filtersEl = document.getElementById("filters");
+    const moreBtn = document.getElementById("more");
+    const avgEl = document.getElementById("avg");
+    let all = [], rubro = "Todos", shown = PAGE;
+
+    const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+
+    function card(t) {
+      const c = el("article", "card t");
+      const head = el("div", "t-head");
+      const img = el("img"); img.alt = ""; img.loading = "lazy";
+      // avatar_url puede ser solo el nombre de archivo o una URL completa.
+      img.src = /^(https?:)?\//.test(t.avatar_url || "") ? t.avatar_url : AVATAR_DIR + (t.avatar_url || "avatar-01.jpg");
+      const who = el("div"); who.append(el("strong", null, t.name), el("small", null, t.district));
+      head.append(img, who);
+      const r = Math.max(0, Math.min(5, Math.round(t.rating) || 0));
+      const stars = el("span", "stars"); stars.setAttribute("aria-label", `${r} de 5 estrellas`);
+      stars.append("★".repeat(r), Object.assign(el("span", "off"), { textContent: "★".repeat(5 - r) }));
+      const meta = el("div", "t-meta"); meta.append(stars, el("span", "chip", t.rubro));
+      c.append(head, meta, el("p", null, t.comment));
+      return c;
+    }
+
+    function render() {
+      const list = rubro === "Todos" ? all : all.filter(t => t.rubro === rubro);
+      box.replaceChildren(...list.slice(0, shown).map(card));
+      moreBtn.hidden = list.length <= shown;
+    }
+
+    function renderFilters() {
+      const rubros = ["Todos", ...new Set(all.map(t => t.rubro))];
+      filtersEl.replaceChildren(...rubros.map(r => {
+        const b = el("button", "fchip", r); b.type = "button";
+        b.setAttribute("aria-pressed", r === rubro);
+        b.onclick = () => {
+          rubro = r; shown = PAGE;
+          filtersEl.querySelectorAll(".fchip").forEach(x => x.setAttribute("aria-pressed", x === b));
+          render();
+        };
+        return b;
+      }));
+    }
+
+    function setData(items) {
+      all = items; rubro = "Todos"; shown = PAGE;
+      // Promedio calculado con los testimonios cargados, nunca fijo.
+      const rated = items.filter(t => Number.isFinite(t.rating));
+      if (rated.length) {
+        avgEl.textContent = `${(rated.reduce((s, t) => s + t.rating, 0) / rated.length).toFixed(1)} ⭐ promedio`;
+        avgEl.hidden = false;
+      }
+      renderFilters(); render();
+    }
+
+    moreBtn.onclick = () => { shown = Infinity; render(); };
+
+    async function load() {
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/landing_testimonials?select=name,district,rubro,rating,comment,avatar_url&order=created_at.asc`, {
+          headers: { apikey: SUPABASE_ANON_KEY, Authorization: `Bearer ${SUPABASE_ANON_KEY}` },
+        });
+        if (!res.ok) throw new Error(res.status);
+        const data = await res.json();
+        if (!data.length) throw new Error("vacío");
+        setData(data);
+      } catch (e) {
+        console.warn("Testimonios: usando fallback", e);
+        setData(FALLBACK);
+      }
+    }
+    load();
+  </script>
+</body>
+</html>
